@@ -46,7 +46,7 @@ const HomeNav = () => {
                       <FaClinicMedical size={40} className="text-success mb-3" />
                       <h5 className="card-title">Clinic</h5>
                       <p className="card-text">Register your clinic with us.</p>
-                      <a href="#" className="btn btn-outline-success">Register as Clinic</a>
+                      <a href="/ClinicReg" className="btn btn-outline-success">Register as Clinic</a>
                     </div>
                   </div>
                 </div>
@@ -82,7 +82,7 @@ const HomeNav = () => {
                       <FaUser size={40} className="text-primary mb-3" />
                       <h5 className="card-title">User </h5>
                       <p className="card-text">Access your user account.</p>
-                      <a href="#" className="btn btn-outline-primary">Login as User</a>
+                      <a href="/UserLogin" className="btn btn-outline-primary">Login as User</a>
                     </div>
                   </div>
                 </div>
@@ -92,7 +92,7 @@ const HomeNav = () => {
                       <FaClinicMedical size={40} className="text-success mb-3" />
                       <h5 className="card-title">Clinic</h5>
                       <p className="card-text">Login to manage your clinic.</p>
-                      <a href="#" className="btn btn-outline-success">Login as Clinic</a>
+                      <a href="/ClinicLogin" className="btn btn-outline-success">Login as Clinic</a>
                     </div>
                   </div>
                 </div>
