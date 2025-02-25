@@ -10,16 +10,22 @@ const UserLogin = () => {
         setLoginData({ ...loginData, [event.target.name]: event.target.value });
     };
 
-    const loginUser  = () => {
+    const loginUser = () => {
         axios.post("http://localhost:3031/signin", loginData)
             .then((response) => {
                 if (response.data.status === "success") {
                     sessionStorage.setItem("token", response.data.token);
-                    sessionStorage.setItem("userId", response.data.userid);
-                    sessionStorage.setItem("userName", response.data.userName); // Save name
+                    sessionStorage.setItem("userId", response.data.user._id);
+                    sessionStorage.setItem("userName", response.data.user.UName);
+                    sessionStorage.setItem("userEmail", response.data.user.Email);
+                    sessionStorage.setItem("userGender", response.data.user.Gender);
+                    sessionStorage.setItem("userPhone", response.data.user.Phone);
+                    sessionStorage.setItem("userAddress", response.data.user.uaddress);
+                    sessionStorage.setItem("userState", response.data.user.state);
+                    sessionStorage.setItem("userCity", response.data.user.City);
 
                     alert("Login Successful");
-                    navigate('/dashboard'); // Redirect to Dashboard
+                    navigate('/UserDash');
                 } else {
                     alert(response.data.status);
                 }
@@ -29,72 +35,15 @@ const UserLogin = () => {
             });
     };
 
-    const containerStyle = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundColor: '#f0f2f5',
-        fontFamily: 'Arial, sans-serif',
-    };
-
-    const formStyle = {
-        backgroundColor: '#ffffff',
-        padding: '20px',
-        borderRadius: '8px',
-        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-        width: '300px',
-        textAlign: 'center',
-    };
-
-    const inputStyle = {
-        width: '100%',
-        padding: '10px',
-        margin: '10px 0',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        fontSize: '16px',
-    };
-
-    const buttonStyle = {
-        backgroundColor: '#28a745',
-        color: '#ffffff',
-        padding: '10px',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: 'pointer',
-        fontSize: '16px',
-        transition: 'background-color 0.3s',
-    };
-
-    const buttonHoverStyle = {
-        backgroundColor: '#218838',
-    };
-
     return (
-        <div style={containerStyle}>
-            <div style={formStyle}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f0f2f5' }}>
+            <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)', width: '300px', textAlign: 'center' }}>
                 <h2>User Login</h2>
                 <label>Email:</label>
-                <input
-                    type="text"
-                    name="Email"
-                    style={inputStyle}
-                    onChange={inputHandler}
-                />
+                <input type="text" name="Email" style={{ width: '100%', padding: '10px', margin: '10px 0' }} onChange={inputHandler} />
                 <label>Password:</label>
-                <input
-                    type="password"
-                    name="Password"
-                    style={inputStyle}
-                    onChange={inputHandler}
-                />
-                <button
-                    style={buttonStyle}
-                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
-                    onClick={loginUser }
-                >
+                <input type="password" name="Password" style={{ width: '100%', padding: '10px', margin: '10px 0' }} onChange={inputHandler} />
+                <button style={{ backgroundColor: '#28a745', color: '#ffffff', padding: '10px', border: 'none', borderRadius: '4px', cursor: 'pointer' }} onClick={loginUser}>
                     Login
                 </button>
             </div>

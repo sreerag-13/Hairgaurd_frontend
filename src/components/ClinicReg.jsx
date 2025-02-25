@@ -13,7 +13,10 @@ const ClinicReg = () => {
     licenseNumber: "",
     experienceYears: "",
     description: "",
+    image:""
   });
+
+  const [image, setImage] = useState(null); // Store the selected image
 
   const stateCityMap = {
     Kerala: ["Thiruvananthapuram", "Kochi", "Kozhikode"],
@@ -26,8 +29,12 @@ const ClinicReg = () => {
     setData({ ...data, [name]: value });
 
     if (name === "state") {
-      setData({ ...data, state: value, city: "" }); // Reset city when state changes
+      setData({ ...data, state: value, city: "" });
     }
+  };
+
+  const imageHandler = (event) => {
+    setImage(event.target.files[0]);
   };
 
   const handleSubmit = async () => {
@@ -40,9 +47,10 @@ const ClinicReg = () => {
       !data.state ||
       !data.city ||
       !data.licenseNumber ||
-      !data.experienceYears
+      !data.experienceYears ||
+      !image
     ) {
-      alert("All fields are required!");
+      alert("All fields are required, including the image!");
       return;
     }
 
@@ -57,7 +65,16 @@ const ClinicReg = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3031/clinic-signup", data);
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+      });
+      formData.append("image", image);
+
+      const response = await axios.post("http://localhost:3031/clinic-signup", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       if (response.data.status === "success") {
         alert("Clinic registration successful!");
         setData({
@@ -72,6 +89,7 @@ const ClinicReg = () => {
           experienceYears: "",
           description: "",
         });
+        setImage(null);
       } else if (response.data.status === "email already exists") {
         alert("Email already exists! Try another.");
       } else {
@@ -122,6 +140,10 @@ const ClinicReg = () => {
           <div style={{ gridColumn: "span 2" }}>
             <label style={{ fontWeight: "500", marginBottom: "5px" }}>Description:</label>
             <textarea style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ced4da" }} name="description" value={data.description} onChange={inputHandler}></textarea>
+          </div>
+          <div style={{ gridColumn: "span 2" }}>
+            <label style={{ fontWeight: "500", marginBottom: "5px" }}>Clinic Image:</label>
+            <input type="file" accept="image/*" onChange={imageHandler} style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ced4da" }} />
           </div>
         </div>
         <div style={{ textAlign: "center", marginTop: "30px" }}>
