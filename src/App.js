@@ -12,6 +12,9 @@ import UserDash from './components/UserDash';
 import UserNav from './components/UserNav';
 import ViewAllClinic from './components/ViewAllClinic';
 import ClinicDetails from './components/ClinicDetails';
+import CompanyReg from './components/CompanyReg';
+import CompanyLog from './components/CompanyLog';
+import CompanyDash from './components/CompanyDash';
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
      <Route path="/UserNav" element={<UserNav/>}/> 
      <Route path="/ViewAllClinic" element={<ViewAllClinic/>}/> 
      <Route path="/ClinicDetails/:id" element={<ClinicDetails />} />
+     <Route path="/CompanyReg" element={<CompanyReg/>} />
+     <Route path="/CompanyLog" element={<CompanyLog/>} />
+     <Route path="/CompanyDash" element={<CompanyDash/>} />
 
     </Routes>
     </BrowserRouter>
