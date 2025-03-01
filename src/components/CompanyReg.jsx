@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const ClinicReg = () => {
+const CompanyReg = () => {
   const [data, setData] = useState({
-    clinicName: "",
+    companyName: "",
     email: "",
     password: "",
     phone: "",
     address: "",
     state: "",
     city: "",
-    licenseNumber: "",
-    experienceYears: "",
-    description: "",
-    image:""
+    zipCode: "",
+    registrationNumber: "",
+    aboutCompany: "",
+    establishedYear: "",
+    companyType: "",
   });
 
-  const [image, setImage] = useState(null); // Store the selected image
+  const [brandLogo, setBrandLogo] = useState(null);
 
   const stateCityMap = {
     Kerala: ["Thiruvananthapuram", "Kochi", "Kozhikode"],
@@ -34,23 +35,24 @@ const ClinicReg = () => {
   };
 
   const imageHandler = (event) => {
-    setImage(event.target.files[0]);
+    setBrandLogo(event.target.files[0]);
   };
 
   const handleSubmit = async () => {
     if (
-      !data.clinicName ||
+      !data.companyName ||
       !data.email ||
       !data.password ||
       !data.phone ||
       !data.address ||
       !data.state ||
       !data.city ||
-      !data.licenseNumber ||
-      !data.experienceYears ||
-      !image
+      !data.zipCode ||
+      !data.registrationNumber ||
+      !data.companyType ||
+      !brandLogo
     ) {
-      alert("All fields are required, including the image!");
+      alert("All fields are required, including the brand logo!");
       return;
     }
 
@@ -69,27 +71,29 @@ const ClinicReg = () => {
       Object.keys(data).forEach((key) => {
         formData.append(key, data[key]);
       });
-      formData.append("image", image);
+      formData.append("brandLogo", brandLogo);
 
-      const response = await axios.post("http://localhost:3031/clinic-signup", formData, {
+      const response = await axios.post("http://localhost:3031/company-signup", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
       if (response.data.status === "success") {
-        alert("Clinic registration successful!");
+        alert("Company registration successful!");
         setData({
-          clinicName: "",
+          companyName: "",
           email: "",
           password: "",
           phone: "",
           address: "",
           state: "",
           city: "",
-          licenseNumber: "",
-          experienceYears: "",
-          description: "",
+          zipCode: "",
+          registrationNumber: "",
+          aboutCompany: "",
+          establishedYear: "",
+          companyType: "",
         });
-        setImage(null);
+        setBrandLogo(null);
       } else if (response.data.status === "email already exists") {
         alert("Email already exists! Try another.");
       } else {
@@ -104,9 +108,9 @@ const ClinicReg = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundColor: "#f8f9fa", padding: "20px" }}>
       <div style={{ width: "100%", maxWidth: "800px", backgroundColor: "#ffffff", borderRadius: "15px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", padding: "30px" }}>
-        <h1 style={{ textAlign: "center", marginBottom: "20px", color: "#007bff", fontSize: "2rem", fontWeight: "bold" }}>Clinic Registration</h1>
+        <h1 style={{ textAlign: "center", marginBottom: "20px", color: "#007bff", fontSize: "2rem", fontWeight: "bold" }}>Company Registration</h1>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
-          {["clinicName", "email", "password", "phone", "address", "licenseNumber", "experienceYears"].map((field) => (
+          {["companyName", "email", "password", "phone", "address", "zipCode", "registrationNumber", "aboutCompany", "establishedYear"].map((field) => (
             <div key={field} style={{ gridColumn: field === "address" ? "span 2" : "auto" }}>
               <label style={{ fontWeight: "500", marginBottom: "5px" }}>{field.replace(/([A-Z])/g, " $1").trim()}:</label>
               <input
@@ -137,12 +141,17 @@ const ClinicReg = () => {
               ))}
             </select>
           </div>
-          <div style={{ gridColumn: "span 2" }}>
-            <label style={{ fontWeight: "500", marginBottom: "5px" }}>Description:</label>
-            <textarea style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ced4da" }} name="description" value={data.description} onChange={inputHandler}></textarea>
+          <div>
+            <label style={{ fontWeight: "500", marginBottom: "5px" }}>Company Type:</label>
+            <select style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ced4da" }} name="companyType" value={data.companyType} onChange={inputHandler} required>
+              <option value="">Select Type</option>
+              <option value="Manufacturer">Manufacturer</option>
+              <option value="Distributor">Distributor</option>
+              <option value="Retailer">Retailer</option>
+            </select>
           </div>
           <div style={{ gridColumn: "span 2" }}>
-            <label style={{ fontWeight: "500", marginBottom: "5px" }}>Clinic Image:</label>
+            <label style={{ fontWeight: "500", marginBottom: "5px" }}>Brand Logo:</label>
             <input type="file" accept="image/*" onChange={imageHandler} style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ced4da" }} />
           </div>
         </div>
@@ -156,4 +165,4 @@ const ClinicReg = () => {
   );
 };
 
-export default ClinicReg;
+export default CompanyReg;

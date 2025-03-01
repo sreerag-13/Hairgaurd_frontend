@@ -56,7 +56,7 @@ const HomeNav = () => {
                       <FaProductHunt size={40} className="text-warning mb-3" />
                       <h5 className="card-title">Product</h5>
                       <p className="card-text">List your products here.</p>
-                      <a href="#" className="btn btn-outline-warning">Register Product</a>
+                      <a href="/CompanyReg" className="btn btn-outline-warning">Register Product</a>
                     </div>
                   </div>
                 </div>
@@ -102,7 +102,7 @@ const HomeNav = () => {
                       <FaProductHunt size={40} className="text-warning mb-3" />
                       <h5 className="card-title">Product</h5>
                       <p className="card-text">Manage your products here.</p>
-                      <a href="#" className="btn btn-outline-warning">Login as Product</a>
+                      <a href="CompanyLog" className="btn btn-outline-warning">Login as Product</a>
                     </div>
                   </div>
                 </div>
