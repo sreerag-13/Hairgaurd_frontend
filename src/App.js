@@ -15,6 +15,18 @@ import ClinicDetails from './components/ClinicDetails';
 import CompanyReg from './components/CompanyReg';
 import CompanyLog from './components/CompanyLog';
 import CompanyDash from './components/CompanyDash';
+import AddProduct from './components/AddProduct';
+import ComNav from './components/ComNav';
+import ViewAllProduct from './components/ViewAllProduct';
+import ProductDetails from './components/ProductDetails';
+import Predict from './components/Predict';
+import Appointment from './components/Appointment';
+import UserAppointment from './components/UserAppointment';
+import UserProfile from './components/UserProfile';
+import DoctorProfile from './components/DoctorProfile';
+import CompanyProfile from './components/CompanyProfile';
+import BookedUser from './components/BookedUser';
+import UserCart from './components/UserCart';
 
 function App() {
   return (
@@ -34,6 +46,21 @@ function App() {
      <Route path="/CompanyReg" element={<CompanyReg/>} />
      <Route path="/CompanyLog" element={<CompanyLog/>} />
      <Route path="/CompanyDash" element={<CompanyDash/>} />
+     <Route path="/AddProduct" element={<AddProduct/>} />
+     <Route path="/ComNav" element={<ComNav/>} />
+     <Route path="/ViewAllProduct" element={<ViewAllProduct/>} />
+     <Route path="/ProductDetails/:id" element={<ProductDetails />} />
+     <Route path="/Predict" element={<Predict />} />
+
+     <Route path="/UserAppointment" element={<UserAppointment/>} />
+     <Route path="/UserProfile" element={<UserProfile/>} />
+
+     <Route path="/Appointment" element={<Appointment />} /> {/* Fixed typo */}
+            <Route path="/DoctorProfile/:id" element={<DoctorProfile />} /> {/* Dynamic ID */}
+            <Route path="/CompanyProfile" element={<CompanyProfile />} />
+            <Route path="/BookedUser" element={<BookedUser/>} />
+            <Route path="/UserCart" element={<UserCart/>} />
+          
 
     </Routes>
     </BrowserRouter>
