@@ -40,7 +40,7 @@ const UserDash = () => {
                             cursor: 'pointer', 
                             transition: 'transform 0.3s, box-shadow 0.3s' 
                         }}
-                        onClick={() => navigate('/buy-products')}
+                        onClick={() => navigate('/ViewAllProduct')}
                         onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                         onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     >
@@ -76,7 +76,7 @@ const UserDash = () => {
                             cursor: 'pointer', 
                             transition: 'transform 0.3s, box-shadow 0.3s' 
                         }}
-                        onClick={() => navigate('/hairfall-prediction')}
+                        onClick={() => navigate('/Predict')}
                         onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                         onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     >
